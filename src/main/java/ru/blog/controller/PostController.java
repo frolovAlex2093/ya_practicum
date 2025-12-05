@@ -27,8 +27,8 @@ public class PostController {
         return postService.getPosts(search, pageNumber, pageSize);
     }
 
-
-    @PostMapping("/{id}")
+    //в тз post, видимо ошибка...
+    @GetMapping("/{id}")
     public Post getPost(@PathVariable Long id) {
         return postService.getPost(id);
     }
