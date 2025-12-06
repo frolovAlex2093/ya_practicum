@@ -1,5 +1,7 @@
 package ru.blog.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,5 +26,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public StandardServletMultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        // Регистрация модуля для правильной работы с LocalDate/LocalDateTime
+        mapper.registerModule(new JavaTimeModule());
+        return mapper;
     }
 }
