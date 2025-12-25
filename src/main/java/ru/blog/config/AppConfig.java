@@ -26,16 +26,4 @@ public class AppConfig {
                 .addScript("classpath:data.sql")
                 .build();
     }
-
-    // JDBC Template для выполнения запросов
-    @Bean
-    public NamedParameterJdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new NamedParameterJdbcTemplate(dataSource);
-    }
-
-    // Менеджер транзакций
-    @Bean
-    public PlatformTransactionManager transactionManager(DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
-    }
 }
