@@ -1,51 +1,40 @@
 # 📝 Blog Backend API
 
-Бэкенд-приложение для блога, разработанное на **Java 21** с использованием **Spring Framework 6**.
-Приложение предоставляет REST API для взаимодействия с фронтендом (React), хранит данные в БД **H2**, поддерживает загрузку изображений.
+Бэкенд-приложение для блога, переписанное с использованием **Spring Boot 3**. Приложение упаковано в Executable JAR, запускается во встроенном контейнере Tomcat, использует H2 базу данных и предоставляет REST API.
 
 ## 🛠 Стек технологий
 
 *   **Язык:** Java 21
-*   **Фреймворк:** Spring Framework 6.1.4 (Context, MVC, JDBC)
-*   **Сборка:** Maven
+*   **Фреймворк:** Spring Boot 3.2+ (Web, JDBC, Test)
+*   **Сборка:** Gradle
 *   **База данных:** H2 (Embedded, in-memory)
-*   **Сервер приложений:** Apache Tomcat 10 (Docker) / Jetty 11 (Maven Plugin)
-*   **Тестирование:** JUnit 5, Mockito, Spring Test, AssertJ
-*   **Контейнеризация:** Docker, Docker Compose
+*   **Сервер приложений:** Embedded Tomcat (встроен в Spring Boot)
+*   **Тестирование:** JUnit 5, Mockito, Spring Boot Test
 
 ---
 
 ## 🚀 Как запустить проект
 
-### Вариант 1: Локальный запуск (через Maven)
-Самый быстрый способ для разработки. Используется плагин `jetty-maven-plugin`.
+### Вариант 1: Локальный запуск (через Gradle)
 
-1.  Убедитесь, что установлены **Java 21** и **Maven**.
+1.  Убедитесь, что установлены **Java 21** и **Gradle**.
 2.  Выполните команду в корне проекта:
     ```bash
-    mvn jetty:run
+    ./gradlew bootRun
     ```
 3.  Бэкенд будет доступен по адресу: `http://localhost:8080`
 
-### Вариант 2: Запуск в Docker (Бэкенд)
-**Предварительные требования:**
-*   Установлен Docker и Docker Compose.
-
-**Команды:**
-
-1.  Сборка контейнера:
+### Вариант 2: Запуск Executable JAR
+1. Сборка готового к проду jar файла со встроенным сервером.
+2. Сборка приложения:
     ```bash
-    docker build -t my-blog-backend .
+    ./gradlew bootJar
     ```
-    
-2.   Запуск контейнера:
+    Файл появится в директории build/libs/.
+3. Запуск:
     ```bash
-    docker run -p 8080:8080 my-blog-backend
+    java -jar build/libs/blog-backend-0.0.1-SNAPSHOT.jar
     ```
-
-4.  **Доступ:**
-    *   ⚙️ **Бэкенд (API):** [http://localhost:8080](http://localhost:8080)
-
 
 ## 🧪 Тестирование
 
@@ -53,16 +42,16 @@
 
 Запуск всех тестов:
 ```bash
-mvn clean test
+./gradlew test
 ```
 
 Покрытие кода (Code Coverage)
 В проекте настроен плагин JaCoCo. Чтобы сгенерировать HTML-отчет о покрытии:
 
 ```bash
-mvn clean test jacoco:report
+./gradlew test jacocoTestReport
 ```
-Отчет будет доступен по пути: target/site/jacoco/index.html.
+Отчет будет доступен по пути: build/reports/jacoco/test/html/index.html.
 
 
 ## 🔌 API Endpoints
