@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan("ru.blog.controller")
 public class WebConfig implements WebMvcConfigurer {
 
@@ -23,16 +22,4 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-    @Bean
-    public StandardServletMultipartResolver multipartResolver() {
-        return new StandardServletMultipartResolver();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        // Регистрация модуля для правильной работы с LocalDate/LocalDateTime
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
-    }
 }
